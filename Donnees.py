@@ -83,6 +83,17 @@ def generate_ue():
             ids_ue.append(id_ue)
     return data
 
+# Generer des données pour la table enseignants_ue
+def generate_enseignants_ue():
+    data = []
+    with open(os.path.join(output_dir, 'enseignants_ue.txt'), 'w') as f:
+        for _ in range(50):  
+            id_utilisateur = random.choice(ids_utilisateur)
+            id_ue = random.choice(ids_ue)
+            f.write(f"INSERT INTO enseignants_ue (id_utilisateur, id_ue) VALUES ({id_utilisateur}, {id_ue});\n")
+            data.append((id_utilisateur, id_ue))
+    return data
+
 ids_formation = []
 # Générer des données pour la table formation
 def generate_formation():
@@ -107,6 +118,17 @@ def generate_formation_ue():
             id_ue = random.choice(ids_ue)
             f.write(f"INSERT INTO formation_ue (id_formation, id_ue) VALUES ({id_formation}, {id_ue});\n")
             data.append((id_formation, id_ue))
+    return data
+
+def generate_promotion():
+    data = []
+    with open(os.path.join(output_dir, 'promotion.txt'), 'w') as f:
+        for _ in range(50):
+            id_utilisateur = random.choice(ids_utilisateur)
+            id_formation = random.choice(ids_formation)
+            annee = fake.year()
+            f.write(f"INSERT INTO promotion (id_utilisateur, id_formation, annee) VALUES ({id_utilisateur}, {id_formation}, '{annee}');\n")
+            data.append((id_utilisateur, id_formation, annee))
     return data
 
 ids_chapitre = []
